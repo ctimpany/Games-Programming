@@ -7,6 +7,7 @@
 #include "transform.h"
 #include "camera.h"
 
+
 static const int DISPLAY_WIDTH = 800;
 static const int DISPLAY_HEIGHT = 600;
 
@@ -91,8 +92,9 @@ int main(int argc, char *args[])
 		float sinCounter = sinf(counter);
 		float absSinCounter = abs(sinCounter);
 
-		transform.GetPos()->x = sinCounter;
-		transform.GetRot()->y = counter;
+		transform.GetRot()->y = 0.5;
+		//transform.GetPos()->x = sinCounter;
+		//transform.GetRot()->y = counter;
 		//transform.GetRot()->z = counter * 100;
 		//transform.GetScale()->x = absSinCounter;
 		//transform.GetScale()->y = absSinCounter;
