@@ -51,6 +51,9 @@
     <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsSphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="cb.bmp">
@@ -81,6 +84,9 @@
     </ClCompile>
     <ClCompile Include="stb_image.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSphere.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

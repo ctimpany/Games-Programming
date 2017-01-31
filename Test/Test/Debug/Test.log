@@ -1,2 +1,7 @@
-﻿  Test.vcxproj -> C:\Users\Calum\Documents\GitHub\Games-Programming\Test\Debug\Test.exe
+﻿  PhysicsSphere.cpp
+c:\users\calum\documents\github\games-programming\test\test\physicssphere.cpp(42): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\calum\documents\github\games-programming\test\test\physicssphere.cpp(44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\calum\documents\github\games-programming\test\test\physicssphere.cpp(52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\calum\documents\github\games-programming\test\test\physicssphere.cpp(20): warning C4101: 'v': unreferenced local variable
+  Test.vcxproj -> C:\Users\Calum\Documents\GitHub\Games-Programming\Test\Debug\Test.exe
   Test.vcxproj -> C:\Users\Calum\Documents\GitHub\Games-Programming\Test\Debug\Test.pdb (Partial PDB)

@@ -25,6 +25,7 @@
     <ClInclude Include="math3d.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="obj_loader.h" />
+    <ClInclude Include="PhysicsSphere.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="texture.h" />
@@ -40,6 +41,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="obj_loader.cpp" />
+    <ClCompile Include="PhysicsSphere.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="texture.cpp" />

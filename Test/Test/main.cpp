@@ -7,6 +7,8 @@
 #include "transform.h"
 #include "camera.h"
 
+#include "PhysicsSphere.h"
+
 
 static const int DISPLAY_WIDTH = 800;
 static const int DISPLAY_HEIGHT = 600;
@@ -103,7 +105,8 @@ int main(int argc, char *args[])
 		texture.Bind();
 		shader.Update(transform, camera);
 		//monkey.Draw();
-		mesh.Draw();
+		//mesh.Draw();
+		PhysicsSphere ps(0.0, 0.0, 0.0, 1, 10);
 
 		display.SwapBuffers();
 		SDL_Delay(1);
@@ -112,3 +115,5 @@ int main(int argc, char *args[])
 
 	return 0;
 }
+
+

@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\calum\documents\github\games-programming\games_programming\games_programming\physicssphere.h(37): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  Games_Programming.vcxproj -> C:\Users\Calum\Documents\GitHub\Games-Programming\Games_Programming\Debug\Games_Programming.exe
+  Games_Programming.vcxproj -> C:\Users\Calum\Documents\GitHub\Games-Programming\Games_Programming\Debug\Games_Programming.pdb (Partial PDB)
