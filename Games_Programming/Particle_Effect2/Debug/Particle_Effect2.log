@@ -1,0 +1,28 @@
+﻿  vec3.cpp
+  Source.cpp
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\physicssphere.h(40): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\physicssphere.h(41): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\particle.h(27): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\particle.h(28): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\source.cpp(103): error C2280: 'ParticleEffect &ParticleEffect::operator =(const ParticleEffect &)': attempting to reference a deleted function
+  c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\particleeffect.h(40): note: compiler has generated 'ParticleEffect::operator =' here
+  Shapes.cpp
+  PhysicsSphere.cpp
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\physicssphere.h(40): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\physicssphere.h(41): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\physicssphere.cpp(423): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\physicssphere.cpp(424): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\physicssphere.cpp(455): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\physicssphere.cpp(456): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\physicssphere.cpp(465): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\physicssphere.cpp(466): warning C4305: '*=': truncation from 'double' to 'float'
+  ParticleEffect.cpp
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\particle.h(27): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\particle.h(28): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  Particle.cpp
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\particle.h(27): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\particle.h(28): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\particle.cpp(49): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+c:\users\calum\documents\github\games-programming\games_programming\particle_effect2\particle.cpp(51): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+  Graphics.cpp
+  Generating Code...

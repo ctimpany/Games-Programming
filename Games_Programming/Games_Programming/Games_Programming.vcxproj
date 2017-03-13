@@ -22,6 +22,7 @@
     <ProjectGuid>{725DDE98-FE94-4895-9F42-E2E7A242FC1E}</ProjectGuid>
     <RootNamespace>Games_Programming</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>Bouncing_Ball</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -134,6 +135,7 @@
     <ClCompile Include="vec3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="PhysicsSphere.h" />
     <ClInclude Include="Shapes.h" />

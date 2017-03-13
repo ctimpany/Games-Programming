@@ -1,0 +1,6 @@
+﻿  Source.cpp
+c:\users\calum\documents\github\games-programming\games_programming\a_star\source.cpp(53): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Node.cpp
+  Generating Code...
+  A_Star.vcxproj -> C:\Users\Calum\Documents\GitHub\Games-Programming\Games_Programming\Debug\A_Star.exe
+  A_Star.vcxproj -> C:\Users\Calum\Documents\GitHub\Games-Programming\Games_Programming\Debug\A_Star.pdb (Partial PDB)

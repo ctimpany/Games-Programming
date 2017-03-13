@@ -35,15 +35,22 @@ bool		running = true;
 
 Graphics	myGraphics;		// Runing all the graphics in this object
 
-Cube		myCube;
 Sphere		mySphere;
-Arrow		arrowX;
-Arrow		arrowY;
-Arrow		arrowZ;
-
 PhysicsSphere phys;
 
 float t = 0.001f;			// Global variable for animation
+
+
+float			angleX = 0.0f;
+float			angleY = 0.0f;
+float			disp = -5.0;
+float			fovy = 45.0f;
+float			posX = 0.0f, posY = -10.0f, posZ = 50.0f;
+glm::vec3		cameraPosition = glm::vec3(posX, posY, posZ);
+glm::vec3		cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3		cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+GLfloat			yaw = -90.0f;	// init pointing to inside
+GLfloat			pitch = 0.0f;	// start centered
 
 
 
@@ -84,99 +91,43 @@ void startup() {
 	// Calculate proj_matrix for the first time.
 	myGraphics.aspect = (float)myGraphics.windowWidth / (float)myGraphics.windowHeight;
 	myGraphics.proj_matrix = glm::perspective(glm::radians(50.0f), myGraphics.aspect, 0.1f, 1000.0f);
-/*
-	// Load Geometry
-	myCube.Load();
-	
-	mySphere.Load();
-	mySphere.fillColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);	// You can change the shape fill colour, line colour or linewidth 
 
-	arrowX.Load(); arrowY.Load(); arrowZ.Load();
-	arrowX.fillColor = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f); arrowX.lineColor = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-	arrowY.fillColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f); arrowY.lineColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
-	arrowZ.fillColor = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f); arrowZ.lineColor = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
-*/
-	phys.Load();
-	phys.fillColor = glm::vec4(1.0f, 0.5f, 0.0f, 1.0f);
+	// Load Geometry
+	mySphere.Load();
+	mySphere.fillColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);	// You can change the shape fill colour, line colour or linewidth
+
+
+	glm::vec3 front;
+	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	front.y = sin(glm::radians(pitch));
+	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+	cameraFront = glm::normalize(front);
+
 
 	myGraphics.SetOptimisations();		// Cull and depth testing
 }
 
 void update(double currentTime) {
-/*
-	// Calculate Cube movement ( T * R * S ) http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
-	glm::mat4 mv_matrix_cube = 
-		glm::translate(glm::vec3(2.0f, 0.0f, -6.0f)) *
-		glm::rotate(t, glm::vec3(0.0f, 1.0f, 0.0f)) *
-		glm::rotate(t, glm::vec3(1.0f, 0.0f, 0.0f)) * 
-		glm::mat4(1.0f);
-	myCube.mv_matrix = mv_matrix_cube;	
-	myCube.proj_matrix = myGraphics.proj_matrix;
-
-	// calculate Sphere movement
-	glm::mat4 mv_matrix_sphere = 
-		glm::translate(glm::vec3(-2.0f, 0.0f, -6.0f)) *
-		glm::rotate(-t, glm::vec3(0.0f, 1.0f, 0.0f)) *
-		glm::rotate(-t, glm::vec3(1.0f, 0.0f, 0.0f)) *
-		glm::mat4(1.0f); 
-	mySphere.mv_matrix = mv_matrix_sphere;
-	mySphere.proj_matrix = myGraphics.proj_matrix;
-
-	//Calculate Arrows translations (note: arrow model points up)
-	glm::mat4 mv_matrix_x =
-		glm::translate(glm::vec3(0.0f, 0.0f, -6.0f)) *
-		glm::rotate(glm::radians(-90.0f), glm::vec3(0.0f, 0.0f, 1.0f)) *
-		glm::scale(glm::vec3(0.2f, 0.5f, 0.2f)) *
-		glm::mat4(1.0f);
-	arrowX.mv_matrix = mv_matrix_x; 
-	arrowX.proj_matrix = myGraphics.proj_matrix;
-
-	glm::mat4 mv_matrix_y =
-		glm::translate(glm::vec3(0.0f, 0.0f, -6.0f)) *
-		//glm::rotate(glm::radians(-90.0f), glm::vec3(0.0f, 0.0f, 1.0f)) *	// already model pointing up
-		glm::scale(glm::vec3(0.2f, 0.5f, 0.2f)) *
-		glm::mat4(1.0f);
-	arrowY.mv_matrix = mv_matrix_y;
-	arrowY.proj_matrix = myGraphics.proj_matrix;
-
-	glm::mat4 mv_matrix_z =
-		glm::translate(glm::vec3(0.0f, 0.0f, -6.0f)) *
-		glm::rotate(glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)) *
-		glm::scale(glm::vec3(0.2f, 0.5f, 0.2f)) *
-		glm::mat4(1.0f);	
-	arrowZ.mv_matrix = mv_matrix_z;
-	arrowZ.proj_matrix = myGraphics.proj_matrix;
-*/
+	glm::mat4 viewMatrix = glm::lookAt(cameraPosition,					// eye
+		cameraPosition + cameraFront,	// centre
+		cameraUp);						// up
 
 	// calculate Sphere movement
 	phys.Update();
 
 	glm::mat4 mv_matrix_sphere2 =
-		glm::translate(glm::vec3(0.0f, phys.getDisplacement(), -50.0f)) *
-		//glm::rotate(-t, glm::vec3(0.0f, 1.0f, 0.0f)) *
-		//glm::rotate(-t, glm::vec3(1.0f, 0.0f, 0.0f)) *
+		glm::translate(phys.getPosition()) *
 		glm::scale(glm::vec3(1.0f, 1.0f, 1.0f)) *
 		glm::mat4(1.0f);
-	phys.mv_matrix = mv_matrix_sphere2;
-	phys.proj_matrix = myGraphics.proj_matrix;
-
-	t += 0.01f; // increment movement variable
+	mySphere.mv_matrix =viewMatrix * mv_matrix_sphere2;
+	mySphere.proj_matrix = myGraphics.proj_matrix;
 }
 
 void render(double currentTime) {
 	// Clear viewport - start a new frame.
 	myGraphics.ClearViewport();
-/*
-	// Draw
-	myCube.Draw();
 	mySphere.Draw();
-	
-	arrowX.Draw(); 
-	arrowY.Draw(); 
-	arrowZ.Draw();
-*/
-
-	phys.Draw();
 }
 
 void onResizeCallback(GLFWwindow* window, int w, int h) {	// call everytime the window is resized
@@ -190,6 +141,8 @@ void onResizeCallback(GLFWwindow* window, int w, int h) {	// call everytime the 
 void onKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) { // called everytime a key is pressed
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
+
+	//if (key == GLFW_KEY_RIGHT) posX += 1.0f;
 
 	//if (key == GLFW_KEY_LEFT) angleY += 0.05f;
 }
