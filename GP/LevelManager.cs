@@ -43,7 +43,6 @@ public class LevelManager : MonoBehaviour {
 		}
 		GenerateLoops ();
 		GenerateWalls ();
-		GenerateEnemies ();
 	}
 	
 	// Update is called once per frame
@@ -206,47 +205,6 @@ public class LevelManager : MonoBehaviour {
 						roomsArray [x, y] = null;
 						roomsCount--;
 						Destroy (r.gameObject);
-					}
-				}
-			}
-		}
-	}
-
-
-	void GenerateEnemies(){
-		for (int x = 0; x < roomsArray.GetLength (0); x++) {
-			for (int y = 0; y < roomsArray.GetLength (1); y++) {
-				Room r = roomsArray [x, y];
-				if (r != null && (x != (roomsArray.GetLength(0)-1)/2 || y != (roomsArray.GetLength(1)-1)/2)) {
-					int numEnemies = pseudoRandom.Next (0, 3);
-
-					switch (numEnemies) {
-					case 2:
-						Vector3 position = r.gameObject.transform.position;
-						position.y += (roomHeight / 5);
-						GameObject enemy1 = (GameObject)Instantiate (
-							                    Resources.Load ("Enemy"),
-							                    position,
-							                    new Quaternion ());
-						enemy1.transform.parent = r.gameObject.transform;
-
-						position = r.gameObject.transform.position;
-						position.y -= (roomHeight / 5);
-						GameObject enemy2 = (GameObject)Instantiate (
-							                    Resources.Load ("Enemy"),
-							                    position,
-							                    new Quaternion ());
-						enemy2.transform.parent = r.gameObject.transform;
-
-						break;
-					case 1:
-						GameObject enemy = (GameObject)Instantiate (
-							Resources.Load ("Enemy"),
-							r.gameObject.transform.position,
-							new Quaternion ());
-						enemy.transform.parent = r.gameObject.transform;
-
-						break;
 					}
 				}
 			}

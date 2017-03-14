@@ -22,7 +22,26 @@ public class Room : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		Camera.main.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, -10f);
+		if (col.gameObject.tag == "Player") {
+			EnemyController[] enemies = this.gameObject.GetComponentsInChildren<EnemyController> ();
+			foreach (EnemyController enemy in enemies) {
+				enemy.move = true;
+				enemy.playerInRoom = true;
+			}
+			Camera.main.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, -10f);
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D col) {
+		if (col.gameObject.tag == "Player") {
+			EnemyController[] enemies = this.gameObject.GetComponentsInChildren<EnemyController> ();
+			foreach (EnemyController enemy in enemies) {
+				enemy.move = false;
+				enemy.playerInRoom = false;
+			}
+		} else if (col.gameObject.tag == "Bullet") {
+			Destroy (col.gameObject);
+		}
 	}
 
 	/*void OnTriggerExit2D(Collider2D col) {
