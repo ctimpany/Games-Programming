@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour {
 
 	int maxRooms, minRooms, roomsCount;
 	GameObject roomParent;
+	Room startRoom, endRoom;
 
 	System.Random pseudoRandom;
 
@@ -43,6 +44,7 @@ public class LevelManager : MonoBehaviour {
 		}
 		GenerateLoops ();
 		GenerateWalls ();
+		GenerateEndRoom ();
 		GenerateEnemies ();
 	}
 	
@@ -81,7 +83,7 @@ public class LevelManager : MonoBehaviour {
 
 		//Debug.Log (bottomLeft.ToString ());
 
-		GenerateRoom ((roomsArray.GetLength(0)-1)/2, (roomsArray.GetLength(1)-1)/2);
+		GenerateStartRoom ((roomsArray.GetLength(0)-1)/2, (roomsArray.GetLength(1)-1)/2);
 
 		while (openSet.Count > 0 && roomsCount < maxRooms) {
 			currentRoom = openSet.Dequeue ();
@@ -120,13 +122,66 @@ public class LevelManager : MonoBehaviour {
 		g.transform.parent = room.transform;
 		SpriteRenderer sr = g.AddComponent<SpriteRenderer> ();
 		Sprite sp = sr.sprite = Sprite.Create (new Texture2D (32,32), new Rect(Vector2.zero, new Vector2( roomWidth, roomHeight)), Vector2.one * 0.5f);
-		sr.color = new Color (pseudoRandom.Next (0, 100) / 100f, pseudoRandom.Next (0, 100) / 100f, pseudoRandom.Next (0, 100) / 100f);
+		sr.color = new Color (0.5f, 0.5f, 0.5f);
 		//Random.ColorHSV (0f, 1f, 1f, 1f, 0.3f, 0.6f);
 		g.transform.localScale = new Vector3 (100f, 100f);
 		//sp.bounds.size = new Vector2 (LevelManager.roomWidth, LevelManager.roomHeight);
 
 		openSet.Enqueue(roomsArray[_x,_y]);
 		roomsCount++;
+	}
+
+	void GenerateStartRoom(int _x, int _y) {
+		GameObject room = new GameObject ("room");
+		startRoom = roomsArray[_x,_y] = room.AddComponent<Room> ();
+		roomsArray[_x,_y].SetIndex (_x, _y);
+		room.transform.parent = roomParent.transform;
+
+		GameObject g = new GameObject ("Floor");
+		g.transform.parent = room.transform;
+		SpriteRenderer sr = g.AddComponent<SpriteRenderer> ();
+		Sprite sp = sr.sprite = Sprite.Create (new Texture2D (32,32), new Rect(Vector2.zero, new Vector2( roomWidth, roomHeight)), Vector2.one * 0.5f);
+		sr.color = Color.green;
+		//Random.ColorHSV (0f, 1f, 1f, 1f, 0.3f, 0.6f);
+		g.transform.localScale = new Vector3 (100f, 100f);
+		//sp.bounds.size = new Vector2 (LevelManager.roomWidth, LevelManager.roomHeight);
+
+		openSet.Enqueue(roomsArray[_x,_y]);
+		roomsCount++;
+	}
+
+	void GenerateEndRoom(){
+		for (int x = 0; x < roomsArray.GetLength (0); x++) {
+			for (int y = 0; y < roomsArray.GetLength (1); y++) {
+				int adjacentRooms = 0;
+				Room r = roomsArray [x, y];
+				if (r != null) {
+					if (r.indexX + 1 < roomsArray.GetLength (0) && roomsArray [r.indexX + 1, r.indexY] != null) {
+						adjacentRooms++;
+					}
+					if (r.indexY + 1 < roomsArray.GetLength (1) && roomsArray [r.indexX, r.indexY + 1] != null) {
+						adjacentRooms++;
+					}
+					if (r.indexX - 1 >= 0 && roomsArray [r.indexX - 1, r.indexY] != null) {
+						adjacentRooms++;
+					}
+					if (r.indexY - 1 >= 0 && roomsArray [r.indexX, r.indexY - 1] != null) {
+						adjacentRooms++;
+					}
+
+					if (adjacentRooms == 1) {
+						float dis = Mathf.Abs (new Vector2((float)(r.indexX - startRoom.indexX), (float)(r.indexY - startRoom.indexY)).magnitude);
+						float chance = 1f - (1f / dis);
+
+						if (pseudoRandom.Next(0, 100)/100f < chance) {
+							r.transform.FindChild ("Floor").GetComponent<SpriteRenderer> ().color = Color.red;
+							//Debug.Log ("hello");
+							return;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	void GenerateWalls(){
@@ -174,7 +229,7 @@ public class LevelManager : MonoBehaviour {
 			for (int y = 0; y < roomsArray.GetLength (1); y++) {
 				int adjacentRooms = 0, adjacentDiagonalRooms = 0;
 				Room r = roomsArray [x, y];
-				if (r != null && x != (roomsArray.GetLength(0)-1)/2 && y != (roomsArray.GetLength(1)-1)/2) {
+				if (r != null && (x != (roomsArray.GetLength(0)-1)/2 || y != (roomsArray.GetLength(1)-1)/2)) {
 					if (r.indexX + 1 < roomsArray.GetLength (0) && roomsArray [r.indexX + 1, r.indexY] != null) {
 						adjacentRooms++;
 					}

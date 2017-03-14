@@ -1,11 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\LevelManager.cs">
     <Files>
-      <File FileName="Assets\LevelManager.cs" Line="221" Column="46" />
-      <File FileName="Assets\PlayerController.cs" Line="78" Column="23" />
-      <File FileName="Assets\EnemyController.cs" Line="52" Column="9" />
-      <File FileName="Assets\Room.cs" Line="43" Column="29" />
+      <File FileName="Assets\LevelManager.cs" Line="158" Column="12" />
+      <File FileName="Assets\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\EnemyController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Room.cs" Line="1" Column="1" />
       <File FileName="Assets\UILoader.cs" Line="1" Column="1" />
       <File FileName="Assets\SceneLoader.cs" Line="1" Column="1" />
     </Files>
